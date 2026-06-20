@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ved Kantawala</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg:          #0c0b0a;
+      --bg-nav:      rgba(12, 11, 10, 0.88);
+      --border:      #1d1b18;
+      --border-mid:  #2a2723;
+      --text:        #e9e3da;
+      --text-mid:    #9e9790;
+      --text-muted:  #5a5650;
+      --text-dim:    #312f2c;
+      --accent:      #c8a87a;
+      --accent-glow: rgba(200, 168, 122, 0.08);
+      --serif:       'Cormorant Garant', Georgia, serif;
+      --mono:        'IBM Plex Mono', 'Courier New', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Grain */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      pointer-events: none;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      padding: 22px 52px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid transparent;
+      transition: background 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease;
+    }
+
+    nav.scrolled {
+      background: var(--bg-nav);
+      border-color: var(--border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-logo:hover { color: var(--accent); }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav-links a {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--text); }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+
+    /* ── MAIN ────────────────────────────────────────────── */
+    main {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 36px;
+    }
+
+    /* ── HERO ────────────────────────────────────────────── */
+    .hero {
+      padding-top: 172px;
+      padding-bottom: 96px;
+    }
+
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      animation: fadeUp 1s ease 0s both;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(56px, 10vw, 96px);
+      font-weight: 300;
+      line-height: 0.92;
+      letter-spacing: -0.015em;
+      color: var(--text);
+      margin-bottom: 44px;
+      animation: fadeUp 1s ease 0.08s both;
+    }
+
+    .hero-name span {
+      display: block;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--accent);
+    }
+
+    .hero-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      animation: fadeUp 1s ease 0.18s both;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 0;
+      align-items: center;
+    }
+
+    .contact-row a,
+    .contact-row span {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-row a:hover { color: var(--accent); }
+
+    .contact-row .dot {
+      color: var(--text-dim);
+      margin: 0 12px;
+      user-select: none;
+    }
+
+    /* ── SECTIONS ────────────────────────────────────────── */
+    section {
+      padding: 84px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 56px;
+    }
+
+    .s-num {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+    }
+
+    .s-title {
+      font-family: var(--serif);
+      font-size: 30px;
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: 0.01em;
+    }
+
+    /* ── EDUCATION ───────────────────────────────────────── */
+    .edu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 44px;
+    }
+
+    .edu-entry {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      column-gap: 28px;
+      row-gap: 2px;
+    }
+
+    .edu-school {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .edu-year {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      padding-top: 4px;
+      text-align: right;
+    }
+
+    .edu-degree {
+      font-style: italic;
+      font-size: 13px;
+      color: var(--text-mid);
+    }
+
+    .edu-loc {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .edu-detail {
+      grid-column: 1 / -1;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .edu-detail .label {
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .edu-detail + .edu-detail { margin-top: 10px; padding-top: 10px; }
+
+    /* ── EXPERIENCE ──────────────────────────────────────── */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .exp-entry {
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .exp-entry::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 5px;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+      transition: background 0.3s ease;
+    }
+
+    .exp-entry:hover::before {
+      background: var(--border-mid);
+    }
+
+    .exp-role {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    .exp-role em {
+      font-style: normal;
+      display: block;
+      font-size: 12px;
+      font-family: var(--mono);
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-top: 2px;
+      letter-spacing: 0.01em;
+    }
+
+    .exp-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 600px;
+    }
+
+    /* ── SKILLS ──────────────────────────────────────────── */
+    .skills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 0;
+    }
+
+    .skill {
+      font-size: 12px;
+      color: var(--text);
+      padding: 5px 14px;
+      border: 1px solid var(--border);
+      border-radius: 0;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      cursor: default;
+      letter-spacing: 0.02em;
+    }
+
+    .skill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    .skill-gap {
+      width: 10px;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer {
+      padding: 52px 0 80px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .footer-links a {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    .footer-copy {
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    /* ── REVEAL ──────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── KEYFRAMES ───────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 600px) {
+      nav { padding: 18px 24px; }
+      .nav-links { gap: 22px; }
+
+      main { padding: 0 24px; }
+
+      .hero { padding-top: 130px; padding-bottom: 72px; }
+
+      .edu-entry {
+        grid-template-columns: 1fr;
+      }
+      .edu-year, .edu-loc {
+        text-align: left;
+        grid-column: 1;
+      }
+
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="#top" class="nav-logo">VK</a>
+    <ul class="nav-links">
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+    </ul>
+  </nav>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-eyebrow">Portfolio</div>
+      <h1 class="hero-name">
+        Ved
+        <span>Kantawala</span>
+      </h1>
+      <div class="hero-contact">
+        <div class="contact-row">
+          <span>Mumbai, India</span>
+          <span class="dot">·</span>
+          <a href="mailto:ved.kantawala@gmail.com">ved.kantawala@gmail.com</a>
+          <span class="dot">·</span>
+          <span>+91 9769156074</span>
+        </div>
+        <div class="contact-row">
+          <a href="https://www.linkedin.com/in/ved178" target="_blank" rel="noopener">linkedin.com/in/ved178</a>
+          <span class="dot">·</span>
+          <a href="https://github.com/Ved178" target="_blank" rel="noopener">github.com/Ved178</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="section-head reveal">
+        <span class="s-num">01</span>
+        <h2 class="s-title">Education</h2>
+      </div>
+
+      <div class="edu-list">
+
+        <div class="edu-entry reveal">
+          <div class="edu-school">University of Wisconsin-Madison</div>
+          <div class="edu-year">2026 – 2030</div>
+          <div class="edu-degree">BSc Computer Science, Incoming Freshman</div>
+          <div class="edu-loc">Madison, WI</div>
+        </div>
+
+        <div class="edu-entry reveal">
+          <div class="edu-school">Prabhavati Padamshi Soni International Junior College</div>
+          <div class="edu-year">2024 – 2026</div>
+          <div class="edu-degree">AS &amp; A Levels</div>
+          <div class="edu-loc">Mumbai</div>
+          <div class="edu-detail">
+            <span class="label">Coursework</span>
+            Physics, Chemistry, Mathematics (Pure Math and Statistics), Information Technology, English General Paper
+          </div>
+        </div>
+
+        <div class="edu-entry reveal">
+          <div class="edu-school">MET Rishikul Vidyalaya</div>
+          <div class="edu-year">2022 – 2024</div>
+          <div class="edu-degree">IGCSE</div>
+          <div class="edu-loc">Mumbai</div>
+          <div class="edu-detail">
+            <span class="label">Coursework</span>
+            Physics, Chemistry, Mathematics, Information Communication Technology, Economics, Business Studies, First Language English, French
+          </div>
+          <div class="edu-detail">
+            <span class="label">SAT</span>
+            1530 / 1600 &nbsp;·&nbsp; 790 Math &nbsp;·&nbsp; 740 Verbal
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="section-head reveal">
+        <span class="s-num">02</span>
+        <h2 class="s-title">Experience</h2>
+      </div>
+
+      <div class="exp-list">
+
+        <div class="exp-entry reveal">
+          <div class="exp-role">
+            Machine Learning Engineer Intern
+            <em>Trilochana Aerospace and Defence Tech</em>
+          </div>
+          <div class="exp-desc">Developing a machine learning model to parse and translate Air Traffic Control (ATC) transmission commands into simplified, plain-English instructions to reduce cognitive load and improve operational clarity for pilots and ground operators.</div>
+        </div>
+
+        <div class="exp-entry reveal">
+          <div class="exp-role">
+            Data Science Intern
+            <em>ModeliCon InfoTech LLP</em>
+          </div>
+          <div class="exp-desc">Built a machine learning based dashboard and digital twin to analyze CO2 capture data, optimizing purity, recovery, and energy efficiency from pilot plant experiments.</div>
+        </div>
+
+        <div class="exp-entry reveal">
+          <div class="exp-role">
+            Artificial Intelligence
+            <em>Spriteblend</em>
+          </div>
+          <div class="exp-desc">Designed an AI-based customer clustering system with strategic insights, creating one-click analytical reports for a CRM dashboard serving exporters.</div>
+        </div>
+
+        <div class="exp-entry reveal">
+          <div class="exp-role">
+            Artificial Intelligence Engineer Intern
+            <em>Zentra Labs</em>
+          </div>
+          <div class="exp-desc">Working on and learning about agentic AI workflows.</div>
+        </div>
+
+        <div class="exp-entry reveal">
+          <div class="exp-role">
+            World Robotics Olympiad — Selected for Nationals
+          </div>
+          <div class="exp-desc">Represented college at the World Robotics Olympiad. Built an automated grain silo monitoring system using Computer Vision to extract spoilt grains and insects.</div>
+        </div>
+
+        <div class="exp-entry reveal">
+          <div class="exp-role">
+            Research — Federated Meta-Learning
+          </div>
+          <div class="exp-desc">Wrote a research paper defining a federated meta-learning pipeline using domain-specific learners to share adaptation strategies to a parent model capable of generalizing to unseen domains.</div>
+        </div>
+
+        <div class="exp-entry reveal">
+          <div class="exp-role">
+            MISA Synergy Competition
+            <em>January 2023</em>
+          </div>
+          <div class="exp-desc">Represented school. Used technology to solve issues caused by health problems such as Alzheimer's and Amnesia.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-head reveal">
+        <span class="s-num">03</span>
+        <h2 class="s-title">Skills</h2>
+      </div>
+
+      <div class="skills-wrap reveal">
+        <div class="skill">Python</div><div class="skill-gap"></div>
+        <div class="skill">DeepLearning AI</div><div class="skill-gap"></div>
+        <div class="skill">ultralytics</div><div class="skill-gap"></div>
+        <div class="skill">YOLO</div><div class="skill-gap"></div>
+        <div class="skill">pandas</div><div class="skill-gap"></div>
+        <div class="skill">numpy</div><div class="skill-gap"></div>
+        <div class="skill">matplotlib</div><div class="skill-gap"></div>
+        <div class="skill">seaborn</div><div class="skill-gap"></div>
+        <div class="skill">OpenCV</div><div class="skill-gap"></div>
+        <div class="skill">scikit-learn</div><div class="skill-gap"></div>
+        <div class="skill">keras</div><div class="skill-gap"></div>
+        <div class="skill">TensorFlow</div><div class="skill-gap"></div>
+        <div class="skill">Flask</div><div class="skill-gap"></div>
+        <div class="skill">Data Science</div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-links">
+        <a href="mailto:ved.kantawala@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/ved178" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/Ved178" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <div class="footer-copy">Ved Kantawala</div>
+    </footer>
+
+  </main>
+
+  <script>
+    const nav = document.getElementById('mainNav');
+
+    // Nav background on scroll
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    // Scroll-reveal with stagger per section group
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        // find siblings in same parent and compute delay by position
+        const siblings = Array.from(el.parentElement.querySelectorAll('.reveal'));
+        const idx = siblings.indexOf(el);
+        el.style.transitionDelay = `${idx * 0.06}s`;
+        el.classList.add('in');
+        revealObs.unobserve(el);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // Active nav link
+    const sections = document.querySelectorAll('section[id]');
+    const navAs = document.querySelectorAll('.nav-links a');
+
+    const activeObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navAs.forEach(a => a.classList.remove('active'));
+          const match = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+          if (match) match.classList.add('active');
+        }
+      });
+    }, { threshold: 0.35 });
+
+    sections.forEach(s => activeObs.observe(s));
+  </script>
+
+</body>
+</html>
