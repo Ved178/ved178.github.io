@@ -331,7 +331,27 @@
       max-width: 600px;
     }
 
+    .exp-date {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .exp-desc + .exp-desc { margin-top: 8px; }
+
     /* ── SKILLS ──────────────────────────────────────────── */
+    .skill-group + .skill-group { margin-top: 28px; }
+
+    .skill-label {
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
     .skills-wrap {
       display: flex;
       flex-wrap: wrap;
@@ -412,7 +432,8 @@
     /* ── RESPONSIVE ──────────────────────────────────────── */
     @media (max-width: 600px) {
       nav { padding: 18px 24px; }
-      .nav-links { gap: 22px; }
+      .nav-links { gap: 16px; }
+      .nav-links a { letter-spacing: 0.1em; }
 
       main { padding: 0 24px; }
 
@@ -438,6 +459,7 @@
     <ul class="nav-links">
       <li><a href="#education">Education</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
     </ul>
   </nav>
@@ -453,11 +475,11 @@
       </h1>
       <div class="hero-contact">
         <div class="contact-row">
-          <span>Mumbai, India</span>
+          <span>Madison, WI</span>
           <span class="dot">·</span>
-          <a href="mailto:ved.kantawala@gmail.com">ved.kantawala@gmail.com</a>
+          <a href="mailto:vkantawala@wisc.edu">vkantawala@wisc.edu</a>
           <span class="dot">·</span>
-          <span>+91 9769156074</span>
+          <span>+1 (608)-298-8752</span>
         </div>
         <div class="contact-row">
           <a href="https://www.linkedin.com/in/ved178" target="_blank" rel="noopener">linkedin.com/in/ved178</a>
@@ -478,9 +500,13 @@
 
         <div class="edu-entry reveal">
           <div class="edu-school">University of Wisconsin-Madison</div>
-          <div class="edu-year">2026 – 2030</div>
-          <div class="edu-degree">BSc Computer Science, Incoming Freshman</div>
+          <div class="edu-year">Sep 2026 – May 2030</div>
+          <div class="edu-degree">BSc Computer Science</div>
           <div class="edu-loc">Madison, WI</div>
+          <div class="edu-detail">
+            <span class="label">Coursework</span>
+            MATH 222 (Calculus II), CS 200 (Intro to Programming), STAT 324 (Statistics with R)
+          </div>
         </div>
 
         <div class="edu-entry reveal">
@@ -492,6 +518,14 @@
             <span class="label">Coursework</span>
             Physics, Chemistry, Mathematics (Pure Math and Statistics), Information Technology, English General Paper
           </div>
+          <div class="edu-detail">
+            <span class="label">SAT</span>
+            1530 / 1600 &nbsp;·&nbsp; 790 Math &nbsp;·&nbsp; 740 Verbal
+          </div>
+          <div class="edu-detail">
+            <span class="label">Activities</span>
+            IIIT Hyderabad Summer School on AI (Computer Vision &amp; Machine Learning track), Jul 2026
+          </div>
         </div>
 
         <div class="edu-entry reveal">
@@ -502,10 +536,6 @@
           <div class="edu-detail">
             <span class="label">Coursework</span>
             Physics, Chemistry, Mathematics, Information Communication Technology, Economics, Business Studies, First Language English, French
-          </div>
-          <div class="edu-detail">
-            <span class="label">SAT</span>
-            1530 / 1600 &nbsp;·&nbsp; 790 Math &nbsp;·&nbsp; 740 Verbal
           </div>
         </div>
 
@@ -522,57 +552,113 @@
       <div class="exp-list">
 
         <div class="exp-entry reveal">
+          <div class="exp-date">Jun 2026 – Aug 2026</div>
           <div class="exp-role">
             Machine Learning Engineer Intern
             <em>Trilochana Aerospace and Defence Tech</em>
           </div>
-          <div class="exp-desc">Developing a machine learning model to parse and translate Air Traffic Control (ATC) transmission commands into simplified, plain-English instructions to reduce cognitive load and improve operational clarity for pilots and ground operators.</div>
+          <div class="exp-desc">Built a Whisper-based speech recognition and command classification pipeline for Air Traffic Control (ATC) transmissions, achieving ~96% accuracy.</div>
+          <div class="exp-desc">Developed a translation layer converting parsed ATC commands into plain-English pilot instructions, reducing cognitive load and improving operational clarity.</div>
         </div>
 
         <div class="exp-entry reveal">
+          <div class="exp-date">Oct 2025 – Aug 2026</div>
           <div class="exp-role">
             Data Science Intern
-            <em>ModeliCon InfoTech LLP</em>
+            <em>ModeliCon InfoTech LLP · Part-time</em>
           </div>
-          <div class="exp-desc">Built a machine learning based dashboard and digital twin to analyze CO2 capture data, optimizing purity, recovery, and energy efficiency from pilot plant experiments.</div>
+          <div class="exp-desc">Built a React dashboard from scratch and a digital twin to visualize and analyze CO2 capture data from pilot plant experiments.</div>
+          <div class="exp-desc">Trained scikit-learn Random Forest models to predict purity, recovery, and energy efficiency across varying operating conditions.</div>
         </div>
 
         <div class="exp-entry reveal">
+          <div class="exp-date">Nov 2025 – Jan 2026</div>
           <div class="exp-role">
-            Artificial Intelligence
+            AI Engineer Intern
             <em>Spriteblend</em>
           </div>
-          <div class="exp-desc">Designed an AI-based customer clustering system with strategic insights, creating one-click analytical reports for a CRM dashboard serving exporters.</div>
+          <div class="exp-desc">Designed a K-means customer segmentation system on 24,000+ CRM records, identifying ~180 strategic cohorts to surface actionable insights for exporters.</div>
+          <div class="exp-desc">Automated one-click analytical report generation for the CRM dashboard, cutting manual reporting effort by over 80%.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-head reveal">
+        <span class="s-num">03</span>
+        <h2 class="s-title">Projects</h2>
+      </div>
+
+      <div class="exp-list">
+
+        <div class="exp-entry reveal">
+          <div class="exp-date">Oct 2026 – Present</div>
+          <div class="exp-role">
+            Corporate Relations Lead
+            <em>WiscoHumanoids Robotics</em>
+          </div>
+          <div class="exp-desc">Working with companies for sponsorships, grants, and industry partnerships to support the projects at WiscoHumanoids.</div>
         </div>
 
         <div class="exp-entry reveal">
+          <div class="exp-date">Sep 2026 – Present</div>
           <div class="exp-role">
-            Artificial Intelligence Engineer Intern
-            <em>Zentra Labs</em>
+            PPO Bipedal Walking
+            <em>WiscoHumanoids Robotics</em>
           </div>
-          <div class="exp-desc">Working on and learning about agentic AI workflows.</div>
+          <div class="exp-desc">Set up a MuJoCo simulation environment and designed reward functions for bipedal locomotion on the Unitree G1; the robot achieves stable straight-line walking.</div>
+          <div class="exp-desc">Implemented a PyTorch PPO training pipeline, now extending to complex scenarios including turning, load-bearing, and external force perturbation.</div>
         </div>
 
         <div class="exp-entry reveal">
+          <div class="exp-date">Nov 2026</div>
           <div class="exp-role">
-            World Robotics Olympiad — Selected for Nationals
+            Data Receipt — On-Device ML Tracker Detection
+            <em>MadHacks 2026 · Team of 4</em>
           </div>
-          <div class="exp-desc">Represented college at the World Robotics Olympiad. Built an automated grain silo monitoring system using Computer Vision to extract spoilt grains and insects.</div>
+          <div class="exp-desc">A Wi-Fi box on an Arduino Uno Q that sits between your phone and the internet: it logs every DNS lookup, blocks known trackers, and runs an on-device model that flags new or disguised trackers no blocklist knows, each with a plain-English reason. No cloud.</div>
+          <div class="exp-desc">Built the ML side: 17 features (CNAME chains to ad companies, cross-app co-occurrence, launch bursts, ASN ownership, flow byte ratios, timing), routed scikit-learn gradient-boosting ensembles, and the live scorer, plus the Docker setup for the ARM board. With InMobi and Vungle removed from every list, the model still caught 18 of their 29 domains at 95% precision.</div>
         </div>
 
         <div class="exp-entry reveal">
+          <div class="exp-date">Mar 2026</div>
           <div class="exp-role">
-            Research — Federated Meta-Learning
+            ML Trading Signal Engine
+            <em>NIFTY 500</em>
           </div>
-          <div class="exp-desc">Wrote a research paper defining a federated meta-learning pipeline using domain-specific learners to share adaptation strategies to a parent model capable of generalizing to unseen domains.</div>
+          <div class="exp-desc">Trained XGBoost on technical and FinBERT news-sentiment features to flag &gt;3% five-day gains across NIFTY 500 stocks.</div>
+          <div class="exp-desc">Backtested on a chronological held-out 20% (78% win rate) with a Nifty 50 regime filter, TP/SL exits, and a paper-trading CLI.</div>
         </div>
 
         <div class="exp-entry reveal">
+          <div class="exp-date">May 2026</div>
           <div class="exp-role">
-            MISA Synergy Competition
-            <em>January 2023</em>
+            Pune Real Estate Listings Extractor
+            <em>WhatsApp to CSV</em>
           </div>
-          <div class="exp-desc">Represented school. Used technology to solve issues caused by health problems such as Alzheimer's and Amnesia.</div>
+          <div class="exp-desc">Built a 5-stage pipeline converting a 2.5M-line broker WhatsApp export into ~103K deduplicated rent/sale listings, with regex extractors for inconsistent formats and a resumable local-LLM (Ollama, Qwen2.5-7B) fallback for missed fields.</div>
+          <div class="exp-desc">Developed an ML forecasting system on the extracted listings, deployed behind an interactive dashboard.</div>
+        </div>
+
+        <div class="exp-entry reveal">
+          <div class="exp-date">Sep 2025</div>
+          <div class="exp-role">
+            Federated Cross-Domain Meta-Learning (FCDML)
+            <em>Research paper · Draft</em>
+          </div>
+          <div class="exp-desc">Proposed FCDML, a federated framework where domain-specific clients share strategy embeddings (gradient trajectories, learning rate dynamics, representation shifts) rather than weights, enabling a central meta-model to generalize to unseen domains.</div>
+          <div class="exp-desc">Benchmarked on CIFAR-100 over 50 communication rounds; FCDML outperformed FedAvg by 31% on unseen tasks with more stable convergence than MAML.</div>
+        </div>
+
+        <div class="exp-entry reveal">
+          <div class="exp-date">Oct 2025</div>
+          <div class="exp-role">
+            Automated Grain Silo Monitoring
+            <em>World Robotics Olympiad · Selected for Nationals</em>
+          </div>
+          <div class="exp-desc">Built a real-time grain inspection system using ResNet18 to detect spoiled grains and insects from a live camera feed, reaching 95% accuracy on a ~8,000-image dataset.</div>
         </div>
 
       </div>
@@ -581,32 +667,56 @@
     <!-- SKILLS -->
     <section id="skills">
       <div class="section-head reveal">
-        <span class="s-num">03</span>
+        <span class="s-num">04</span>
         <h2 class="s-title">Skills</h2>
       </div>
 
-      <div class="skills-wrap reveal">
-        <div class="skill">Python</div><div class="skill-gap"></div>
-        <div class="skill">DeepLearning AI</div><div class="skill-gap"></div>
-        <div class="skill">ultralytics</div><div class="skill-gap"></div>
-        <div class="skill">YOLO</div><div class="skill-gap"></div>
-        <div class="skill">pandas</div><div class="skill-gap"></div>
-        <div class="skill">numpy</div><div class="skill-gap"></div>
-        <div class="skill">matplotlib</div><div class="skill-gap"></div>
-        <div class="skill">seaborn</div><div class="skill-gap"></div>
-        <div class="skill">OpenCV</div><div class="skill-gap"></div>
-        <div class="skill">scikit-learn</div><div class="skill-gap"></div>
-        <div class="skill">keras</div><div class="skill-gap"></div>
-        <div class="skill">TensorFlow</div><div class="skill-gap"></div>
-        <div class="skill">Flask</div><div class="skill-gap"></div>
-        <div class="skill">Data Science</div>
+      <div class="skill-group reveal">
+        <div class="skill-label">Languages</div>
+        <div class="skills-wrap">
+          <div class="skill">Python</div><div class="skill-gap"></div>
+          <div class="skill">R</div><div class="skill-gap"></div>
+          <div class="skill">Java</div><div class="skill-gap"></div>
+          <div class="skill">C</div><div class="skill-gap"></div>
+          <div class="skill">C++</div>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-label">Machine Learning</div>
+        <div class="skills-wrap">
+          <div class="skill">PyTorch</div><div class="skill-gap"></div>
+          <div class="skill">TensorFlow</div><div class="skill-gap"></div>
+          <div class="skill">Keras</div><div class="skill-gap"></div>
+          <div class="skill">scikit-learn</div><div class="skill-gap"></div>
+          <div class="skill">XGBoost</div><div class="skill-gap"></div>
+          <div class="skill">YOLO</div><div class="skill-gap"></div>
+          <div class="skill">OpenCV</div>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-label">Tools</div>
+        <div class="skills-wrap">
+          <div class="skill">Git</div><div class="skill-gap"></div>
+          <div class="skill">Linux</div><div class="skill-gap"></div>
+          <div class="skill">Docker</div><div class="skill-gap"></div>
+          <div class="skill">SQLite</div><div class="skill-gap"></div>
+          <div class="skill">MuJoCo</div><div class="skill-gap"></div>
+          <div class="skill">LangChain</div><div class="skill-gap"></div>
+          <div class="skill">pandas</div><div class="skill-gap"></div>
+          <div class="skill">NumPy</div><div class="skill-gap"></div>
+          <div class="skill">Matplotlib</div><div class="skill-gap"></div>
+          <div class="skill">Matlab</div><div class="skill-gap"></div>
+          <div class="skill">Flask</div>
+        </div>
       </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
       <div class="footer-links">
-        <a href="mailto:ved.kantawala@gmail.com">Email</a>
+        <a href="mailto:vkantawala@wisc.edu">Email</a>
         <a href="https://www.linkedin.com/in/ved178" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/Ved178" target="_blank" rel="noopener">GitHub</a>
       </div>
